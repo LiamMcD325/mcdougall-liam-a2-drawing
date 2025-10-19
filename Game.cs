@@ -18,6 +18,9 @@ namespace MohawkGame2D
         int playerX = 400;
         int playerY = 400;
 
+        int fireG = 0; //Changes how much green is included in the color. Changes the flame to more of an orange or yellow as time goes on
+        bool isYellow = false; //Will turn the flame yellow, then when true turn back to red and so forth.
+
         /// <summary>
         ///     Setup runs once before the game loop begins.
         /// </summary>
@@ -43,10 +46,12 @@ namespace MohawkGame2D
         /// </summary>
         public void Update()
         {
+            Color Flame = new Color(255, fireG, 0);
             Window.ClearBackground(Color.Black);
 
             for (int i = 0; i < starsX.Length; i++)
             {
+                Draw.LineColor = Color.Black;
                 Draw.FillColor = Color.White;
                 Draw.Circle(starsX[i], starsY[i], 2);
                 if (starsX[i] >= 400) { starsX[i]++; }
@@ -66,7 +71,11 @@ namespace MohawkGame2D
                 Draw.FillColor = Color.Gray;
                 Draw.Circle(playerX, playerY, 10);
                 Draw.FillColor = Color.Gray;
-                Draw.Rectangle(playerX + 30, playerY, 30, 15);
+                Draw.Rectangle(playerX + 2, playerY - 10, 30, 20);
+                Draw.LineColor = Flame;
+                Draw.FillColor = Flame;
+                Draw.Circle(playerX + 34, playerY, 5);
+                Draw.Circle(playerX + 30, playerY + 2, 5);
             }
             //If player is on left side of screen
             else if (playerX <= 400)
@@ -76,8 +85,13 @@ namespace MohawkGame2D
                 Draw.Circle(playerX, playerY, 10);
                 Draw.FillColor = Color.Gray;
                 Draw.Rectangle(playerX - 30, playerY - 10, 30, 20);
+                Draw.LineColor = Flame;
+                Draw.FillColor = Flame;
+                Draw.Circle(playerX - 33, playerY, 5);
+                Draw.Circle(playerX - 29, playerY + 2, 5);
             }
 
+            flameColour();
 
             playerInputs();
         }
@@ -112,6 +126,14 @@ namespace MohawkGame2D
         public void resetStar(int i){
             if ((starsX[i] < 0) || (starsX[i] > 800)) { starsX[i] = Random.Integer(800); }
             else if ((starsY[i] < 0) || (starsY[i] > 600)) { starsY[i] = Random.Integer(600); }
+        }
+
+        /// <summary>
+        /// Resets the star position if offscreen
+        /// </summary>
+        public void flameColour()
+        {
+            
         }
     }
 
