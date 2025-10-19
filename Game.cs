@@ -18,7 +18,9 @@ namespace MohawkGame2D
         /// </summary>
         public void Setup()
         {
-
+            Window.SetSize(800, 600);
+            Window.SetTitle("Assignment 2 Drawing");
+            Window.TargetFPS = 60;
         }
 
         /// <summary>
@@ -26,7 +28,7 @@ namespace MohawkGame2D
         /// </summary>
         public void Update()
         {
-
+            Window.ClearBackground(Color.Gray);
         }
     }
 
